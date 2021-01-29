@@ -1,2 +1,2 @@
-# robster
-Rob your precious model
+# robster project
+On-device machine learning robbery project for fun and profit
