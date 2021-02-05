@@ -130,3 +130,9 @@ dmypy.json
 
 # visual studio code
 .vscode/
+
+# example apk
+*.apk
+
+# unusual cache file
+.DS_Store
