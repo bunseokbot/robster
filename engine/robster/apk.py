@@ -1,5 +1,7 @@
 from zipfile import ZipFile, is_zipfile
 
+from dexparser import Dexparser
+
 from .log import logger
 
 import framework
@@ -12,6 +14,13 @@ FRAMEWORK_KEYWORD = [
     b'Softmax',
     b'conv1',
 ]
+
+
+FRAMEWORK_METHOD = {
+    b'Lorg/tensorflow/lite': 'tflite',
+    b'Lcom/googlecode/tesseract': 'tesseract',
+    b'Lorg/pytorch': 'pytorch'
+}
 
 
 class InvalidAPKFileError(Exception):
@@ -27,8 +36,36 @@ class APK(object):
         self.zfile = ZipFile(path)
         self.models = []
         self.keywords = []
+        self.methods = []
 
     def scan(self):
+        self.scan_dex()
+        self.scan_asset()
+
+    def scan_dex(self):
+        dexfiles = self._read_dexfiles()
+        classes = set()
+
+        for dexfile in dexfiles:
+            dex = Dexparser(fileobj=self.zfile.read(dexfile))
+            string_table = dex.get_strings()
+            type_table = dex.get_typeids()
+            method_keywords = list(FRAMEWORK_METHOD.keys())
+            method_tmp = set()
+
+            for method in dex.get_methods():
+                class_name = string_table[type_table[method['class_idx']]]
+                for keyword in method_keywords:
+                    if class_name.startswith(keyword):
+                        method_name = class_name + string_table[method['name_idx']]
+                        if method_name not in method_tmp:
+                            method_tmp.add(method_name)
+                            self.methods.append({
+                                'type': FRAMEWORK_METHOD[keyword],
+                                'method': method_name.decode()
+                            })
+
+    def scan_asset(self):
         files = self._read_assets()
         logger.debug(f"{len(files)} asset(s) found")
 
@@ -55,7 +92,7 @@ class APK(object):
 
             for keyword in FRAMEWORK_KEYWORD:
                 if keyword in stream:
-                    self.models.append({
+                    self.keywords.append({
                         'keyword': keyword,
                         'path': filepath
                     })
@@ -65,12 +102,19 @@ class APK(object):
 
         for module_name in framework.__all__:
             mod = importlib.import_module(f"framework.{module_name}")
-            for class_name in [value for value in dir(mod) if not value.startswith("__")]:
+            classes = dir(mod)
+            for class_name in classes[:classes.index("__builtins__")]:
                 frameworks.append(getattr(mod, class_name)())
 
         logger.debug(f"{len(frameworks)} framework(s) are loaded successfully")
 
         return frameworks
 
+    def read(self, path):
+        return self.zfile.read(path)
+
     def _read_assets(self):
         return [name for name in self.zfile.namelist() if name.startswith("assets")]
+
+    def _read_dexfiles(self):
+        return [name for name in self.zfile.namelist() if name.endswith('.dex')]
