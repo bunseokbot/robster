@@ -19,7 +19,8 @@ FRAMEWORK_KEYWORD = [
 FRAMEWORK_METHOD = {
     b'Lorg/tensorflow/lite': 'tflite',
     b'Lcom/googlecode/tesseract': 'tesseract',
-    b'Lorg/pytorch': 'pytorch'
+    b'Lorg/pytorch': 'pytorch',
+    b'Lcom/facebook/caffe2': 'caffe2'
 }
 
 
@@ -56,6 +57,10 @@ class APK(object):
             for method in dex.get_methods():
                 class_name = string_table[type_table[method['class_idx']]]
                 for keyword in method_keywords:
+                    if b'caffe' in class_name:
+                        print(class_name)
+                    
+                    """
                     if class_name.startswith(keyword):
                         method_name = class_name + string_table[method['name_idx']]
                         if method_name not in method_tmp:
@@ -64,6 +69,7 @@ class APK(object):
                                 'type': FRAMEWORK_METHOD[keyword],
                                 'method': method_name.decode()
                             })
+                    """
 
     def scan_asset(self):
         files = self._read_assets()

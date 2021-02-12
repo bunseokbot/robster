@@ -2,7 +2,6 @@ from argparse import ArgumentParser
 
 from robster.log import logger
 from robster.apk import APK, InvalidAPKFileError
-from robster.evaluate import ModelEvaluation
 
 import glob
 import os
@@ -40,13 +39,6 @@ def run_engine_as_single_mode(path):
 
         if models or keywords or methods:
             count += 1
-        
-        if models:
-            for model in models:
-                print(model['path'])
-                evaluation = ModelEvaluation(apk.read(model['path']), model['type'])
-                evaluation.run()
-                del evaluation
 
         del apk
 
