@@ -136,3 +136,6 @@ dmypy.json
 
 # unusual cache file
 .DS_Store
+
+# static file
+models/
