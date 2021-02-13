@@ -1,4 +1,6 @@
 FROM python:3.7
 
+ENV ROBSTER_PRODUCTION=1
+
 WORKDIR /usr/app/deploy
 COPY engine .
