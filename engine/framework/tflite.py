@@ -1,3 +1,6 @@
+import tensorflow as tf
+
+
 class TensorflowLite(object):
     name = "tflite"
 
@@ -6,3 +9,12 @@ class TensorflowLite(object):
             return True
 
         return False
+
+    def extract(self, stream):
+        interpreter = tf.lite.Interpreter(model_content=stream)
+        interpreter.allocate_tensors()
+        tensors = [
+            {'name': tensor['name'], 'index': tensor['index']}
+            for tensor in interpreter.get_tensor_details()
+        ]
+        return tensors

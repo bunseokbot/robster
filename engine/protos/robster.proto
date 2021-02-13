@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package robster;
+
+// define service
+service Robster {
+    rpc ExecuteAnalysis (AnalysisRequest) returns (AnalysisResponse) {}
+}
+
+// define messages
+message AnalysisRequest {
+    string id = 1;
+    string path = 2;
+    string type = 3;
+}
+
+message AnalysisResponse {
+    string id = 1;
+    bool status = 2;
+    string message = 3;
+}

@@ -28,3 +28,6 @@ class Tesseract(object):
                 return False
 
         return False
+
+    def extract(self, stream):
+        return []

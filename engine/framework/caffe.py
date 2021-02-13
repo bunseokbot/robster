@@ -6,3 +6,6 @@ class Caffe(object):
             return True
 
         return False
+
+    def extract(self, stream):
+        return []

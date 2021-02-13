@@ -4,3 +4,6 @@ class MNN(object):
     def detect(self, stream):
         if stream[-4:] == b'MNN\x00':
             return True
+
+    def extract(self, stream):
+        return []
