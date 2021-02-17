@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController
 class ReportController {
     @GetMapping("/{reportId}")
     fun getReportById(@PathVariable("reportId") reportId: String): String {
-        return "test"
+        return reportId
     }
+
 }
