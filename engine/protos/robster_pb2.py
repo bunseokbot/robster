@@ -15,11 +15,11 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='protos/robster.proto',
-  package='robster',
+  package='proto',
   syntax='proto3',
-  serialized_options=None,
+  serialized_options=b'\n project.namjun.kim.robster.proto',
   create_key=_descriptor._internal_create_key,
-  serialized_pb=b'\n\x14protos/robster.proto\x12\x07robster\"9\n\x0f\x41nalysisRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\"?\n\x10\x41nalysisResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06status\x18\x02 \x01(\x08\x12\x0f\n\x07message\x18\x03 \x01(\t2S\n\x07Robster\x12H\n\x0f\x45xecuteAnalysis\x12\x18.robster.AnalysisRequest\x1a\x19.robster.AnalysisResponse\"\x00\x62\x06proto3'
+  serialized_pb=b'\n\x14protos/robster.proto\x12\x05proto\"9\n\x0f\x41nalysisRequest\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0c\n\x04path\x18\x02 \x01(\t\x12\x0c\n\x04type\x18\x03 \x01(\t\"?\n\x10\x41nalysisResponse\x12\n\n\x02id\x18\x01 \x01(\t\x12\x0e\n\x06status\x18\x02 \x01(\x08\x12\x0f\n\x07message\x18\x03 \x01(\t2O\n\x07Robster\x12\x44\n\x0f\x65xecuteAnalysis\x12\x16.proto.AnalysisRequest\x1a\x17.proto.AnalysisResponse\"\x00\x42\"\n project.namjun.kim.robster.protob\x06proto3'
 )
 
 
@@ -27,28 +27,28 @@ DESCRIPTOR = _descriptor.FileDescriptor(
 
 _ANALYSISREQUEST = _descriptor.Descriptor(
   name='AnalysisRequest',
-  full_name='robster.AnalysisRequest',
+  full_name='proto.AnalysisRequest',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='robster.AnalysisRequest.id', index=0,
+      name='id', full_name='proto.AnalysisRequest.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='path', full_name='robster.AnalysisRequest.path', index=1,
+      name='path', full_name='proto.AnalysisRequest.path', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='type', full_name='robster.AnalysisRequest.type', index=2,
+      name='type', full_name='proto.AnalysisRequest.type', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -66,35 +66,35 @@ _ANALYSISREQUEST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=33,
-  serialized_end=90,
+  serialized_start=31,
+  serialized_end=88,
 )
 
 
 _ANALYSISRESPONSE = _descriptor.Descriptor(
   name='AnalysisResponse',
-  full_name='robster.AnalysisResponse',
+  full_name='proto.AnalysisResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='robster.AnalysisResponse.id', index=0,
+      name='id', full_name='proto.AnalysisResponse.id', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='status', full_name='robster.AnalysisResponse.status', index=1,
+      name='status', full_name='proto.AnalysisResponse.status', index=1,
       number=2, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='message', full_name='robster.AnalysisResponse.message', index=2,
+      name='message', full_name='proto.AnalysisResponse.message', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
@@ -112,8 +112,8 @@ _ANALYSISRESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=92,
-  serialized_end=155,
+  serialized_start=90,
+  serialized_end=153,
 )
 
 DESCRIPTOR.message_types_by_name['AnalysisRequest'] = _ANALYSISREQUEST
@@ -123,32 +123,33 @@ _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 AnalysisRequest = _reflection.GeneratedProtocolMessageType('AnalysisRequest', (_message.Message,), {
   'DESCRIPTOR' : _ANALYSISREQUEST,
   '__module__' : 'protos.robster_pb2'
-  # @@protoc_insertion_point(class_scope:robster.AnalysisRequest)
+  # @@protoc_insertion_point(class_scope:proto.AnalysisRequest)
   })
 _sym_db.RegisterMessage(AnalysisRequest)
 
 AnalysisResponse = _reflection.GeneratedProtocolMessageType('AnalysisResponse', (_message.Message,), {
   'DESCRIPTOR' : _ANALYSISRESPONSE,
   '__module__' : 'protos.robster_pb2'
-  # @@protoc_insertion_point(class_scope:robster.AnalysisResponse)
+  # @@protoc_insertion_point(class_scope:proto.AnalysisResponse)
   })
 _sym_db.RegisterMessage(AnalysisResponse)
 
 
+DESCRIPTOR._options = None
 
 _ROBSTER = _descriptor.ServiceDescriptor(
   name='Robster',
-  full_name='robster.Robster',
+  full_name='proto.Robster',
   file=DESCRIPTOR,
   index=0,
   serialized_options=None,
   create_key=_descriptor._internal_create_key,
-  serialized_start=157,
-  serialized_end=240,
+  serialized_start=155,
+  serialized_end=234,
   methods=[
   _descriptor.MethodDescriptor(
-    name='ExecuteAnalysis',
-    full_name='robster.Robster.ExecuteAnalysis',
+    name='executeAnalysis',
+    full_name='proto.Robster.executeAnalysis',
     index=0,
     containing_service=None,
     input_type=_ANALYSISREQUEST,

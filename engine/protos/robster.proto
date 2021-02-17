@@ -1,10 +1,12 @@
 syntax = "proto3";
 
-package robster;
+option java_package = "project.namjun.kim.robster.proto";
+
+package proto;
 
 // define service
 service Robster {
-    rpc ExecuteAnalysis (AnalysisRequest) returns (AnalysisResponse) {}
+    rpc executeAnalysis (AnalysisRequest) returns (AnalysisResponse) {}
 }
 
 // define messages

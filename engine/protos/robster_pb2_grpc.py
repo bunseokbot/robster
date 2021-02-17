@@ -15,8 +15,8 @@ class RobsterStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.ExecuteAnalysis = channel.unary_unary(
-                '/robster.Robster/ExecuteAnalysis',
+        self.executeAnalysis = channel.unary_unary(
+                '/proto.Robster/executeAnalysis',
                 request_serializer=protos_dot_robster__pb2.AnalysisRequest.SerializeToString,
                 response_deserializer=protos_dot_robster__pb2.AnalysisResponse.FromString,
                 )
@@ -26,7 +26,7 @@ class RobsterServicer(object):
     """define service
     """
 
-    def ExecuteAnalysis(self, request, context):
+    def executeAnalysis(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -35,14 +35,14 @@ class RobsterServicer(object):
 
 def add_RobsterServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'ExecuteAnalysis': grpc.unary_unary_rpc_method_handler(
-                    servicer.ExecuteAnalysis,
+            'executeAnalysis': grpc.unary_unary_rpc_method_handler(
+                    servicer.executeAnalysis,
                     request_deserializer=protos_dot_robster__pb2.AnalysisRequest.FromString,
                     response_serializer=protos_dot_robster__pb2.AnalysisResponse.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'robster.Robster', rpc_method_handlers)
+            'proto.Robster', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -52,7 +52,7 @@ class Robster(object):
     """
 
     @staticmethod
-    def ExecuteAnalysis(request,
+    def executeAnalysis(request,
             target,
             options=(),
             channel_credentials=None,
@@ -62,7 +62,7 @@ class Robster(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/robster.Robster/ExecuteAnalysis',
+        return grpc.experimental.unary_unary(request, target, '/proto.Robster/executeAnalysis',
             protos_dot_robster__pb2.AnalysisRequest.SerializeToString,
             protos_dot_robster__pb2.AnalysisResponse.FromString,
             options, channel_credentials,

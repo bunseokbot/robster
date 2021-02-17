@@ -52,7 +52,7 @@ class Robster(robster_pb2_grpc.RobsterServicer):
             reports.insert_one(report, session=session)
         logger.debug("Successfully save report")
 
-    def ExecuteAnalysis(self, request, context):
+    def executeAnalysis(self, request, context):
         _id = request.id
         status = True
         message = "success"
