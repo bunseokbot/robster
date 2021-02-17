@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value
 import org.springframework.stereotype.Service
 import project.namjun.kim.robster.proto.RobsterGrpc
 import project.namjun.kim.robster.proto.RobsterOuterClass
+import java.util.*
 
 @Service
 class AnalysisService {
@@ -14,20 +15,21 @@ class AnalysisService {
 
     @Value("\${robster.analyzer.port}")
     var analyzerPort: Int = 0
+    val uniqueId: String = UUID.randomUUID().toString()
 
-    fun executeAnalysis(): String {
+    fun executeAnalysis(analysisDTO: AnalysisDTO): RobsterOuterClass.AnalysisResponse {
         var managedChannel: ManagedChannel = ManagedChannelBuilder.forAddress(
             analyzerHost, analyzerPort
         ).usePlaintext().build()
         var robsterStub: RobsterGrpc.RobsterBlockingStub = RobsterGrpc.newBlockingStub(managedChannel)
         var analysisRequest: RobsterOuterClass.AnalysisRequest = RobsterOuterClass.AnalysisRequest.newBuilder()
-            .setId("id")
-            .setPath("D:\\dev\\ml-attacker\\binaries\\com.hyundaicard.appcard.apk")
-            .setType("apk")
+            .setId(uniqueId)
+            .setPath(analysisDTO.requestPath)
+            .setType(analysisDTO.requestType)
             .build()
 
         var analysisResponse: RobsterOuterClass.AnalysisResponse = robsterStub.executeAnalysis(analysisRequest)
         managedChannel.shutdown()
-        return analysisResponse.message
+        return analysisResponse
     }
 }

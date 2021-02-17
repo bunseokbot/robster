@@ -3,9 +3,7 @@ package project.namjun.kim.robster.analysis
 import io.grpc.ManagedChannel
 import io.grpc.ManagedChannelBuilder
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 import project.namjun.kim.robster.proto.RobsterGrpc
 import project.namjun.kim.robster.proto.RobsterOuterClass
 
@@ -16,9 +14,14 @@ class AnalysisController {
     @Autowired
     lateinit var analysisService: AnalysisService
 
-    @GetMapping("/test")
-    fun testMethod(): String {
-        return analysisService.executeAnalysis()
+    @PostMapping("/")
+    fun requestAnalysis(@RequestBody analysisDTO: AnalysisDTO): AnalysisMapping {
+        var analysisResult: RobsterOuterClass.AnalysisResponse = analysisService.executeAnalysis(analysisDTO)
+        return AnalysisMapping(
+            id = analysisResult.id,
+            status = analysisResult.status,
+            message = analysisResult.message
+        )
     }
 
 }
