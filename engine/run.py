@@ -25,10 +25,9 @@ if not os.path.isdir(MODEL_PATH):
 
 
 class Robster(robster_pb2_grpc.RobsterServicer):
-    def _make_report(self, _id, apk):
+    def _make_report(self, apk):
         report = {
-            '_id': _id,
-            'filehash': apk.sha256,
+            '_id': apk.sha256,
             'models': apk.models,
             'keywords': apk.keywords,
             'methods': apk.methods,
@@ -79,7 +78,7 @@ class Robster(robster_pb2_grpc.RobsterServicer):
                 for method in methods:
                     logger.debug(f"Asset: {method['method']} Type: {method['type']}") 
 
-            report = self._make_report(_id=request.id, apk=apk)
+            report = self._make_report(apk=apk)
             self._save_report(report)
 
             del apk

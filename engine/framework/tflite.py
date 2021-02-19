@@ -15,6 +15,6 @@ class TensorflowLite(object):
         interpreter.allocate_tensors()
         tensors = [
             {'name': tensor['name'], 'index': tensor['index']}
-            for tensor in interpreter.get_tensor_details()
+            for tensor in interpreter.get_tensor_details() if tensor['name']
         ]
         return tensors
