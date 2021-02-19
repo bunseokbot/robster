@@ -10,22 +10,22 @@ import java.util.*
 
 @Service
 class AnalysisService {
-    @Value("\${robster.analyzer.host}")
+    @Value("\${robster.engine.host}")
     lateinit var analyzerHost: String
 
-    @Value("\${robster.analyzer.port}")
+    @Value("\${robster.engine.port}")
     var analyzerPort: Int = 0
     val uniqueId: String = UUID.randomUUID().toString()
 
-    fun executeAnalysis(analysisDTO: AnalysisDTO): RobsterOuterClass.AnalysisResponse {
+    fun executeAnalysis(filePath: String, fileType: String): RobsterOuterClass.AnalysisResponse {
         var managedChannel: ManagedChannel = ManagedChannelBuilder.forAddress(
             analyzerHost, analyzerPort
         ).usePlaintext().build()
         var robsterStub: RobsterGrpc.RobsterBlockingStub = RobsterGrpc.newBlockingStub(managedChannel)
         var analysisRequest: RobsterOuterClass.AnalysisRequest = RobsterOuterClass.AnalysisRequest.newBuilder()
             .setId(uniqueId)
-            .setPath(analysisDTO.requestPath)
-            .setType(analysisDTO.requestType)
+            .setPath(filePath)
+            .setType(fileType)
             .build()
 
         var analysisResponse: RobsterOuterClass.AnalysisResponse = robsterStub.executeAnalysis(analysisRequest)

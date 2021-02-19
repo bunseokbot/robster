@@ -26,6 +26,7 @@ sourceSets {
 
 dependencies {
     implementation("com.google.protobuf:protobuf-java:3.6.1")
+    implementation("org.springframework.boot:spring-boot-starter-data-mongodb")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
     implementation("org.springframework.boot:spring-boot-starter-security")
     implementation("org.springframework.boot:spring-boot-starter-web")
