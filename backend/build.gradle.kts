@@ -11,7 +11,7 @@ import com.google.protobuf.gradle.*
 }
 
 group = "project.namjun.kim"
-version = "1.0.0-SNAPSHOT"
+version = "1.0.0"
 java.sourceCompatibility = JavaVersion.VERSION_11
 
 repositories {
