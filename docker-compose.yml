@@ -1,0 +1,45 @@
+version: "3.3"
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile-backend
+    container_name: backend
+    command: ["java", "-jar", "robster.jar"]
+    ports:
+      - "8080:8080"
+    volumes: 
+      - storage:/storage
+    networks:
+      - robster
+  engine:
+    build:
+      context: .
+      dockerfile: dockerfiles/Dockerfile-engine
+    container_name: engine
+    command: ["python", "run.py", "-w"]
+    environment: 
+      - MONGODB_HOST=mongodb
+      - MODEL_PATH=/models
+      - ROBSTER_PRODUCTION=yes
+    volumes:
+      - storage:/storage
+      - models:/models
+    networks:
+      - robster
+  mongodb:
+    image: mongo:4.4
+    container_name: mongodb
+    volumes:
+      - database:/data/db
+    networks:
+      - robster
+
+networks:
+  robster:
+
+volumes:
+  storage:
+  models:
+  database:

@@ -4,3 +4,5 @@ ENV ROBSTER_PRODUCTION=1
 
 WORKDIR /usr/app/deploy
 COPY engine .
+
+RUN pip install -r requirements.txt
