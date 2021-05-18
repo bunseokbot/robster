@@ -6,7 +6,9 @@ Rob your precious machine learning model
 ## Introduction
 This project was developed for detect and extract from mobile application (APK only)<br>
 Currently, only static analysis method is supported.<br><br>
-See the detail description in blog (Korean) - https://iam.namjun.kim/research/2021/02/24/rob-your-precious-machine-learning-model/
+
+See the detail description in blog (Korean)<br>
+https://iam.namjun.kim/research/2021/02/24/rob-your-precious-machine-learning-model/
 
 ## Features
 ### Detection
